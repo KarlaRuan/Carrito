@@ -4,21 +4,23 @@
             <table class="table table-striped">
                 <thead class="thead-dark">
                     <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Actions</th>
+                        <th>Modelo</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="student in Students" :key="student._id">
-                        <td>{{ student.name }}</td>
-                        <td>{{ student.email }}</td>
-                        <td>{{ student.phone }}</td>
+                    <tr v-for="product in products" :key="product._id">
+                        <td id="model">{{ product.model }}</td>
+                        <td id="desc">{{ product.desc }}</td>
+                        <td>$<span id="price">{{ product.price }}</span></td>
+                        <td><input :id="product._id" style="width: 30px" type="text" value="1"></td>
                         <td>
-                            <router-link :to="{name: 'edit', params: { id: student._id }}" class="btn btn-success">Edit
-                            </router-link>
-                            <button @click.prevent="deleteStudent(student._id)" class="btn btn-danger">Delete</button>
+                            <button @click.prevent="add2Cart(product.model, product.desc, product.price,product._id)" class="btn">
+                                <img src="../../public/img/carrito-de-compras.png" style="width: 30px"></button>
                         </td>
                     </tr>
                 </tbody>
@@ -32,28 +34,33 @@
     export default {
         data() {
             return {
-                Students: []
+                products: []
             }
         },
         created() {
-            let apiURL = 'http://localhost:4000/api';
+            let apiURL = 'http://localhost:4000/product';
             axios.get(apiURL).then(res => {
-                this.Students = res.data;
+                this.products = res.data;
             }).catch(error => {
                 console.log(error)
             });
         },
         methods: {
-            deleteStudent(id){
-                let apiURL = `http://localhost:4000/api/delete-student/${id}`;
-                let indexOfArrayItem = this.Students.findIndex(i => i._id === id);
-                if (window.confirm("Do you really want to delete?")) {
-                    axios.delete(apiURL).then(() => {
-                        this.Students.splice(indexOfArrayItem, 1);
-                    }).catch(error => {
+            add2Cart(model, desc, price, id){
+                let quantity = document.getElementById(id).value;
+                let apiURL = `http://localhost:4000/cart/add-cart`;
+         //       console.log(model+" - "+desc+" - "+price+" - "+quantity)
+                axios.post(apiURL, {
+                    model : model,
+                    price: price,
+                    desc: desc,
+                    quantity: quantity
+                }).then(() => {
+                    this.$router.push('/')
+                }).catch(error => {
                         console.log(error)
-                    });
-                }
+                    console.log("Tenemos un problema")
+                });
             }
         }
     }

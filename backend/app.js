@@ -18,6 +18,9 @@ mongoose.connect(database.db, {
 )
 
 const studentAPI = require('../backend/routes/student.route')
+const productAPI = require('../backend/routes/product.route')
+const cartAPI = require('../backend/routes/cart.route')
+
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -26,7 +29,9 @@ app.use(bodyParser.urlencoded({
 app.use(cors());
 
 // API
-app.use('/api', studentAPI)
+app.use('/product', productAPI);
+app.use('/api', studentAPI);
+app.use('/cart', cartAPI);
 
 // Create port
 const port = process.env.PORT || 4000;

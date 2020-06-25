@@ -13,11 +13,6 @@ const routes = [
     path: '/view',
     name: 'view',
     component: () => import('../components/ListComponent')
-  },
-  {
-    path: '/edit/:id',
-    name: 'edit',
-    component: () => import('../components/EditComponent')
   }
 ]
 

@@ -1,15 +1,15 @@
-<template>
-  <div>
+<template >
+  <div >
     <!-- Nav bar -->
     <nav class="navbar navbar-dark bg-primary justify-content-between flex-nowrap flex-row">
       <div class="container">
-        <a class="navbar-brand float-left">MEVN Stack Example</a>
+        <a class="navbar-brand float-left">Logitech Store</a>
         <ul class="nav navbar-nav flex-row float-right">
           <li class="nav-item">
-            <router-link class="nav-link pr-3" to="/">Create Student</router-link>
+            <router-link class="nav-link pr-3" to="/view">Productos</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/view">View Students</router-link>
+            <router-link class="nav-link" to="/"><img src="../public/img/supermercado.png" style="width: 30px"></router-link>
           </li>
         </ul>
       </div>
