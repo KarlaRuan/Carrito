@@ -7,12 +7,12 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: () => import('../components/CreateComponent')
+    component: () => import('../components/ListComponent')
   },
   {
     path: '/view',
     name: 'view',
-    component: () => import('../components/ListComponent')
+    component: () => import('../components/CreateComponent')
   }
 ]
 

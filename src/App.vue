@@ -6,10 +6,10 @@
         <a class="navbar-brand float-left">Logitech Store</a>
         <ul class="nav navbar-nav flex-row float-right">
           <li class="nav-item">
-            <router-link class="nav-link pr-3" to="/view">Productos</router-link>
+            <router-link class="nav-link pr-3" to="/" style="color: white">Productos</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/"><img src="../public/img/supermercado.png" style="width: 30px"></router-link>
+            <router-link class="nav-link" to="/view"><img src="../public/img/supermercado.png" style="width: 30px"></router-link>
           </li>
         </ul>
       </div>

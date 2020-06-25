@@ -56,7 +56,7 @@
                     desc: desc,
                     quantity: quantity
                 }).then(() => {
-                    this.$router.push('/')
+                    this.$router.push('/view')
                 }).catch(error => {
                         console.log(error)
                     console.log("Tenemos un problema")

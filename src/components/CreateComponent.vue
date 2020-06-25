@@ -19,10 +19,10 @@
                     <td>${{ product.price }}</td>
                     <td><input :id="product._id" style="width: 30px" type="text" :value="product.quantity"></td>
                     <td>
-                        <button @click.prevent="deleteProduct(product._id)" class="btn btn-danger">Delete</button>
+                        <button @click.prevent="deleteProduct(product._id)" class="btn btn-danger">Eliminar</button>
                         <span class="pr-2"></span>
                         <button @click.prevent="updateProduct(product.model, product.desc, product.price,product._id)" class="btn btn-primary">
-                            Update</button>
+                            Actualizar</button>
                     </td>
                 </tr>
                 <tr>
@@ -33,8 +33,8 @@
                 </tbody>
             </table>
             <hr>
-            <router-link :to="{name: 'view'}" class="btn btn-primary">Seguir comprando</router-link>
-            <router-link :to="{name: 'view'}" class="btn btn-success float-right">Proceder al pago </router-link>
+            <router-link :to="{name: 'home'}" class="btn btn-primary">Seguir comprando</router-link>
+            <button @click.prevent="payProduct()" class="btn btn-success float-right">Proceder al pago</button>
 
         </div>
     </div>
@@ -68,6 +68,10 @@
                 if (window.confirm("¿Seguro que quieres eliminar este artículo de tu carrito??")) {
                     axios.delete(apiURL).then(() => {
                         this.products.splice(indexOfArrayItem, 1);
+                        this.total = 0;
+                        this.products.forEach((value) => {
+                            this.total += (value.price*value.quantity);
+                        });
                     }).catch(error => {
                         console.log(error)
                     });
@@ -82,10 +86,24 @@
                     desc: desc,
                     quantity: quantity
                 }).then(() => {
-                    this.$router.push('/')
-                }).catch(error => {
+                    this.$router.go();
+                })
+                    .catch(error => {
                     console.log(error)
                     console.log("Tenemos un problema2")
+                });
+            },
+            payProduct(){
+                this.total = 0;
+                this.products.forEach((value) => {
+
+                    console.log(value._id)
+                    let apiURL = `http://localhost:4000/cart/delete-cart/${value._id}`;
+                    axios.delete(apiURL).then(() => {
+                    }).catch(error => {
+                        console.log(error)
+                    });
+                    this.$router.go();
                 });
             }
         }
